@@ -31,7 +31,6 @@ const todosSlice = createSlice({
       .addCase(getTodos.fulfilled, (state, action) => {
         state.loading = false;
         state.todos = action.payload;
-        console.log(action.payload);
       })
       .addCase(getTodos.rejected, (state, action) => {
         state.loading = false;
