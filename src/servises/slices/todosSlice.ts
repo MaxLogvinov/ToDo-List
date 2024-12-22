@@ -12,9 +12,15 @@ const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    // clearEpisodes(state) {
-    //   state.episodes = [];
-    // }
+    toggleCompleted(state, action) {
+      const todo = state.todos.find(todo => todo.id === action.payload);
+      if (todo) {
+        todo.completed = !todo.completed;
+      }
+    },
+    deleteTodo(state, action) {
+      state.todos = state.todos.filter(todo => todo.id !== action.payload);
+    }
   },
   extraReducers: builder => {
     builder
@@ -25,6 +31,7 @@ const todosSlice = createSlice({
       .addCase(getTodos.fulfilled, (state, action) => {
         state.loading = false;
         state.todos = action.payload;
+        console.log(action.payload);
       })
       .addCase(getTodos.rejected, (state, action) => {
         state.loading = false;
@@ -33,5 +40,5 @@ const todosSlice = createSlice({
   }
 });
 
-export const {} = todosSlice.actions;
+export const { toggleCompleted, deleteTodo } = todosSlice.actions;
 export default todosSlice.reducer;
