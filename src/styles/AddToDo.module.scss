@@ -1,0 +1,12 @@
+@import './mixins.scss';
+
+.container {
+  @include flex-center-col;
+  width: 80%;
+}
+
+.buttons {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+}

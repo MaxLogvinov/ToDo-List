@@ -17,9 +17,25 @@ const todosSlice = createSlice({
       if (todo) {
         todo.completed = !todo.completed;
       }
+      localStorage.setItem('todos', JSON.stringify(state.todos));
     },
     deleteTodo(state, action) {
       state.todos = state.todos.filter(todo => todo.id !== action.payload);
+      localStorage.setItem('todos', JSON.stringify(state.todos));
+    },
+    hydrateTodos(state, action) {
+      state.todos = action.payload;
+    },
+    addTodo(state, action) {
+      const maxId = state.todos.length > 0 ? Math.max(...state.todos.map(todo => todo.id)) : 0;
+      const newTodo = {
+        id: maxId + 1,
+        title: action.payload,
+        completed: false,
+        userId: 1
+      };
+      state.todos.unshift(newTodo);
+      localStorage.setItem('todos', JSON.stringify(state.todos));
     }
   },
   extraReducers: builder => {
@@ -31,6 +47,7 @@ const todosSlice = createSlice({
       .addCase(getTodos.fulfilled, (state, action) => {
         state.loading = false;
         state.todos = action.payload;
+        localStorage.setItem('todos', JSON.stringify(action.payload));
       })
       .addCase(getTodos.rejected, (state, action) => {
         state.loading = false;
@@ -39,5 +56,5 @@ const todosSlice = createSlice({
   }
 });
 
-export const { toggleCompleted, deleteTodo } = todosSlice.actions;
+export const { toggleCompleted, deleteTodo, hydrateTodos, addTodo } = todosSlice.actions;
 export default todosSlice.reducer;

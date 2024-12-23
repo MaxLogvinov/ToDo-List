@@ -41,7 +41,6 @@ export default function Layout({
           <Header />
           <main className={styles.main}>{children}</main>
         </div>
-        {/* <Footer /> */}
       </Provider>
     </>
   );
