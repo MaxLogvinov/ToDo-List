@@ -11,17 +11,17 @@ export default function AddToDo() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (text.trim() === '') {
       alert('Введите текст задачи!');
       return;
     }
-    dispatch(addTodo(text));
-    router.push('/');
+    await dispatch(addTodo(text));
+    router.push(`/`);
   };
 
   return (
-    <form className={styles.container}>
+    <div className={styles.container}>
       <TextField
         multiline
         fullWidth
@@ -43,6 +43,6 @@ export default function AddToDo() {
           Сохранить
         </Button>
       </div>
-    </form>
+    </div>
   );
 }

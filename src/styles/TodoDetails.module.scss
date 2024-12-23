@@ -1,8 +1,9 @@
-@import './mixins.scss';
-
 .todoDetails {
   width: 50%;
-  @include flex-center-col;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .title {
@@ -15,7 +16,10 @@
 }
 
 .list {
-  @include flex-center-col;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 }
 

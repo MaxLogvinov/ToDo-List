@@ -15,7 +15,7 @@ export default function Home() {
     if (storedTodos) {
       const parsedTodos = JSON.parse(storedTodos);
       dispatch(hydrateTodos(parsedTodos));
-    } else if (todos.length < 1) {
+    } else {
       dispatch(getTodos());
     }
   }, [dispatch, todos.length]);
